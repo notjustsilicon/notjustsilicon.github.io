@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="notjustsilicon explores semiconductors, engineering, computing, business and the ideas connecting them.">
+<title>notjustsilicon — Silicon is the start. Curiosity is the point.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{--bg:#0b1117;--panel:#111a23;--ink:#edf3f0;--muted:#9aa9b1;--line:#263541;--accent:#c7f36b;--soft:#15212c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.container{max-width:1180px;margin:auto;padding:0 30px}
+header{position:sticky;top:0;z-index:20;background:rgba(11,17,23,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-size:21px;font-weight:700;letter-spacing:-1.2px}.brand span{color:var(--accent)}
+.navlinks{display:flex;gap:28px;font-size:13px;color:var(--muted)}.navlinks a:hover{color:var(--accent)}.navright{display:flex;align-items:center;gap:12px}
+.iconbtn{border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 12px;border-radius:50%}
+.hero{padding:100px 0 78px}.eyebrow{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(48px,7.6vw,94px);line-height:1.02;letter-spacing:-5px;max-width:970px;margin:24px 0;font-weight:600}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{font-size:17px;line-height:1.8;color:var(--muted);max-width:650px}.hero-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 19px;border:1px solid var(--line);font-size:13px;font-weight:600;transition:.2s}.btn.primary{background:var(--accent);border-color:var(--accent);color:#10170c}.btn:hover{transform:translateY(-2px)}
+.section{padding:66px 0;border-top:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px;gap:18px}
+.section-head h2{font-size:36px;letter-spacing:-1.6px;margin:9px 0 0}.small{font:10px 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:1px}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}.category{padding:25px 22px;border-right:1px solid var(--line);transition:.2s}.category:last-child{border:0}.category:hover{background:var(--panel)}
+.category .number{font:10px 'IBM Plex Mono',monospace;color:var(--accent)}.category h3{font-size:17px;margin:18px 0 8px}.category p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.article{display:block;background:var(--panel);border:1px solid var(--line);transition:.25s;min-width:0}.article:hover{transform:translateY(-5px);border-color:#718b4e}
+.article img{width:100%;height:190px;object-fit:cover;display:block;filter:saturate(.7) contrast(1.05)}.article-content{padding:21px}
+.tag{font:600 10px 'IBM Plex Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:1.2px}.article h3{font-size:21px;line-height:1.35;letter-spacing:-.6px;margin:13px 0;font-weight:600}
+.article p{font-size:13px;line-height:1.8;color:var(--muted)}.article-foot{display:flex;justify-content:space-between;font:10px 'IBM Plex Mono',monospace;color:var(--accent);margin-top:20px}
+.about{background:var(--panel);border:1px solid var(--line);padding:56px;display:grid;grid-template-columns:1.1fr 1fr;gap:45px}.about h2{font-size:42px;letter-spacing:-1.8px;line-height:1.15;margin:16px 0}.about p{font-size:14px;line-height:1.9;color:var(--muted)}
+footer{padding:32px 0;color:var(--muted);font:11px 'IBM Plex Mono',monospace}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.search{padding:12px 15px;border:1px solid var(--line);background:var(--panel);color:var(--ink);width:100%;max-width:300px;font:13px 'Space Grotesk',sans-serif}.empty{color:var(--muted);padding:30px 0;display:none}
+body.light{--bg:#f4f6f2;--panel:#fff;--ink:#111b20;--muted:#64727a;--line:#dce3dc;--accent:#567b1f;--soft:#e9eee8}body.light header{background:rgba(244,246,242,.92)}
+@media(max-width:800px){.navlinks{display:none}.hero{padding:70px 0 52px}.hero h1{letter-spacing:-2.5px}.categories{grid-template-columns:repeat(2,1fr)}.category:nth-child(2){border-right:0}.category:nth-child(-n+2){border-bottom:1px solid var(--line)}.articles{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr;padding:32px}}
+@media(max-width:560px){.container{padding:0 20px}.hero h1{font-size:48px}.section{padding:45px 0}.section-head{align-items:flex-start;flex-direction:column}.section-head h2{font-size:30px}.articles{grid-template-columns:1fr}.article img{height:210px}.about h2{font-size:34px}}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+  <a class="brand" href="#">notjust<span>silicon</span></a>
+  <nav class="navlinks">
+    <a href="#home">Home</a>
+    <a href="#explore">Explore</a>
+    <a href="#articles">Articles</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="navright">
+    <button class="iconbtn" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+  </div>
+</div>
+</header>
+
+<main>
+<section class="container hero" id="home">
+  <div class="eyebrow">AN INDEPENDENT TECHNOLOGY & IDEAS JOURNAL · EST. 2026</div>
+  <h1>Silicon is the start.<br><em>Curiosity goes further.</em></h1>
+  <p>
+    A journal about semiconductors, computing, business and the systems shaping our world. Making complex ideas easier to understand — without losing the details.
+  </p>
+  <div class="hero-actions">
+    <a class="btn primary" href="#articles">Explore the journal ↗</a>
+    <a class="btn" href="#about">A little about me</a>
+  </div>
+  <img class="hero-image"
+  src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=85"
+  alt="Semiconductor circuit board">
+</section>
+
+<section class="container section" id="explore">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">THE FIELD NOTES</div>
+      <h2>More than one perspective.</h2>
+    </div>
+    <span class="small">Four lenses. One curious mind.</span>
+  </div>
+
+  <div class="categories">
+    <a class="category" href="#articles">
+      <span class="number">01 / ENGINEERING</span>
+      <h3>Semiconductors</h3>
+      <p>VLSI, chip architecture, fabrication and the future of computing.</p>
+    </a>
+    <a class="category" href="#articles">
+      <span class="number">02 / STRATEGY</span>
+      <h3>Business</h3>
+      <p>Entrepreneurship, management, companies and business models.</p>
+    </a>
+    <a class="category" href="#articles">
+      <span class="number">03 / ECONOMY</span>
+      <h3>Markets</h3>
+      <p>Economics, finance, industries and global developments.</p>
+    </a>
+    <a class="category" href="#articles">
+      <span class="number">04 / KNOWLEDGE</span>
+      <h3>Explainers</h3>
+      <p>Complex ideas explained simply, with context and clarity.</p>
+    </a>
+  </div>
+</section>
+
+<section class="container section" id="articles">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">LATEST THINKING</div>
+      <h2>Read beyond the obvious.</h2>
+    </div>
+    <input class="search" id="search" type="search"
+      placeholder="Search articles..." oninput="filterArticles()">
+  </div>
+
+  <div class="articles" id="articleGrid">
+
+    <article class="article" data-search="semiconductor chip design vlsi engineering">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800" alt="Circuit board">
+      <div class="article-content">
+        <div class="tag">Semiconductors</div>
+        <h3>Inside the World of Chip Design</h3>
+        <p>How billions of transistors come together to create the processors powering modern technology.</p>
+        <div class="article-foot"><span>Coming soon</span><span>01</span></div>
+      </div>
+    </article>
+
+    <article class="article" data-search="business strategy entrepreneurship management">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800" alt="Modern workspace">
+      <div class="article-content">
+        <div class="tag">Business & Strategy</div>
+        <h3>How Businesses Build Competitive Advantage</h3>
+        <p>Understanding the decisions, systems and strategies that help businesses grow.</p>
+        <div class="article-foot"><span>Coming soon</span><span>02</span></div>
+      </div>
+    </article>
+
+    <article class="article" data-search="technology artificial intelligence computing future">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800" alt="Earth and technology">
+      <div class="article-content">
+        <div class="tag">Technology</div>
+        <h3>Understanding the Technology Shaping Tomorrow</h3>
+        <p>A closer look at the innovations changing industries and the way we live.</p>
+        <div class="article-foot"><span>Coming soon</span><span>03</span></div>
+      </div>
+    </article>
+
+    <a class="article" href="fpga-hardware.html" data-search="fpga vhdl verilog digital logic hardware programmable logic">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800" alt="Electronic circuit board">
+      <div class="article-content">
+        <div class="tag">FPGA · Digital Design</div>
+        <h3>What Can You Actually Build With an FPGA?</h3>
+        <p>From custom processors and memory controllers to signal processing, embedded systems and hardware accelerators.</p>
+        <div class="article-foot"><span>Read article ↗</span><span>04</span></div>
+      </div>
+    </a>
+
+    <a class="article" href="ai-hft-hardware.html" data-search="artificial intelligence AI GPU TPU HBM FPGA high frequency trading HFT smartnic hardware">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Computing and technology infrastructure">
+      <div class="article-content">
+        <div class="tag">AI · Computing · Finance</div>
+        <h3>The Hardware Behind AI and High-Frequency Trading</h3>
+        <p>How GPUs, TPUs, high-bandwidth memory, FPGAs and SmartNICs power demanding computing systems.</p>
+        <div class="article-foot"><span>Read article ↗</span><span>05</span></div>
+      </div>
+    </a>
+
+  </div>
+  <div class="empty" id="empty">No matching articles found.</div>
+</section>
+
+<section class="container section" id="about">
+  <div class="about">
+    <div>
+      <div class="eyebrow">WHY NOTJUSTSILICON</div>
+      <h2>Not just silicon.<br>Not just one subject.</h2>
+    </div>
+    <div>
+      <p>
+        I'm Alok Mishra — an electronics and communication engineering student drawn to semiconductors, technology, business and the ideas connecting them.
+      </p>
+      <p>
+        This is a space to research, understand, question and share. From transistors to business models, from chip architecture to the wider world around it.
+      </p>
+      <p><strong>Think in systems. Stay curious. Build what matters.</strong></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-inner">
+  <span>© 2026 notjustsilicon. All rights reserved.</span>
+  <span>Silicon is the start. Curiosity is the point.</span>
+</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle('light');
+}
+function filterArticles() {
+  const query = document.getElementById('search').value.toLowerCase();
+  const cards = document.querySelectorAll('.article');
+  let count = 0;
+  cards.forEach(card => {
+    const match = (card.innerText + ' ' + card.dataset.search)
+      .toLowerCase().includes(query);
+    card.style.display = match ? '' : 'none';
+    if(match) count++;
+  });
+  document.getElementById('empty').style.display =
+    count ? 'none' : 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Can You Actually Build With an FPGA? | notjustsilicon</title>
+<meta name="description" content="A practical introduction to FPGA architecture and useful hardware projects you can implement with VHDL or Verilog.">
+<meta name="theme-color" content="#f8f7f4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#0b1117;--paper:#111a23;--ink:#edf3f0;--muted:#9aa9b1;--line:#263541;--accent:#c7f36b;--soft:#15212c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;line-height:1.85}
+a{color:var(--accent);text-decoration:none}a:hover{opacity:.75}.wrap{max-width:900px;margin:auto;padding:0 28px}
+header{background:rgba(11,17,23,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.brand{color:var(--ink);font-size:20px;font-weight:700;letter-spacing:-1px}.brand span{color:var(--accent)!important}
+.navlinks{display:flex;align-items:center;gap:22px;flex-wrap:wrap;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}.navlinks a{color:var(--muted)}.navlinks a:hover{color:var(--accent)}
+.hero{padding:78px 0 58px}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:2px;font:600 10px 'IBM Plex Mono',monospace}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.08;letter-spacing:-2.7px;font-weight:600;margin:20px 0}.lead{color:var(--muted);font-size:17px;line-height:1.85;max-width:820px}
+.meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}.pill{border:1px solid var(--line);padding:5px 11px;color:var(--muted);font:10px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.6px}
+main{padding:8px 0 76px}.section{border-top:1px solid var(--line);padding:38px 0 34px}.section h2{font-size:29px;line-height:1.25;letter-spacing:-.8px;font-weight:600;margin:0 0 18px}
+.section h3{font-size:17px;line-height:1.4;margin:20px 0 8px;font-weight:600}.section p{margin:12px 0;color:#c0cbd0}.muted{color:var(--muted)!important}
+.grid,.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:var(--paper);border:1px solid var(--line);padding:21px;margin:0}
+.card h3{margin:10px 0 8px;font-size:17px}.card p,.card li{color:var(--muted);font-size:13px;line-height:1.8}.card ul{margin-bottom:0}
+.tag{display:inline-block;background:var(--soft);color:var(--accent);padding:4px 8px;font:600 10px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px}
+.diagram{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:26px 0}.node{background:var(--paper);border:1px solid var(--line);padding:14px 17px;text-align:center;min-width:130px;color:var(--ink);font-size:13px}.arrow{color:var(--accent);font-size:1.35rem}
+.callout{border-left:3px solid var(--accent);padding:15px 19px;background:var(--soft);color:var(--ink);margin:22px 0}ul,ol{padding-left:22px}li{margin:7px 0}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13px;background:var(--paper)}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--accent);font-weight:600;background:var(--soft)}
+.project{border:1px solid var(--line);padding:17px;background:var(--paper)}.project strong{display:block;color:var(--ink);margin-bottom:5px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font:10px 'IBM Plex Mono',monospace}
+@media(max-width:650px){.wrap{padding:0 20px}.nav{padding:13px 0}.navlinks{gap:12px;font-size:9px}.hero{padding:55px 0 38px}.hero h1{letter-spacing:-1.5px}.grid,.two-col{grid-template-columns:1fr}.section{padding:30px 0}.section h2{font-size:25px}.card{padding:18px}table{display:block;overflow-x:auto}}
+
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="index.html">notjust<span>silicon</span></a>
+<nav class="navlinks"><a href="index.html#home">Home</a><a href="index.html#articles">Articles</a><a href="fpga-hardware.html">FPGA</a><a href="ai-hft-hardware.html">AI &amp; HFT</a></nav></div></header>
+
+<section class="wrap hero">
+<div class="eyebrow">Hardware · FPGA · Digital Design</div>
+<h1>What Can You Actually Build With an FPGA?</h1>
+<p class="lead">An FPGA is more than a chip for running small programs. It is configurable silicon: you can program its logic resources to become custom digital hardware—from a processor to a memory controller or a real-time signal-processing system.</p>
+<div class="meta"><span class="pill">Beginner friendly</span><span class="pill">VHDL / Verilog</span><span class="pill">Digital hardware</span></div>
+</section>
+<main class="wrap">
+<section class="section">
+<h2>1. What is an FPGA?</h2>
+<p><strong>FPGA</strong> stands for <em>Field-Programmable Gate Array</em>. It is an integrated circuit that can be configured after manufacturing to implement digital logic. Rather than simply executing a fixed sequence of software instructions, an FPGA is configured to create hardware structures that operate concurrently.</p>
+<div class="diagram"><div class="node">Your HDL design<br><span class="muted">VHDL / Verilog</span></div><span class="arrow">→</span><div class="node">Synthesis &amp;<br>implementation</div><span class="arrow">→</span><div class="node">FPGA bitstream</div><span class="arrow">→</span><div class="node">Configured<br>hardware</div></div>
+<p class="muted">The exact resources and capabilities depend on the FPGA family and device.</p>
+</section>
+<section class="section">
+<h2>2. What is inside an FPGA?</h2>
+<div class="grid">
+<div class="card"><span class="tag">Logic</span><h3>Configurable Logic Blocks (CLBs)</h3><p class="muted">Implement Boolean functions and sequential logic. Depending on the FPGA family, these blocks contain LUTs, flip-flops and supporting circuitry.</p></div>
+<div class="card"><span class="tag">Lookup</span><h3>Look-Up Tables (LUTs)</h3><p class="muted">A LUT stores a truth-table-like configuration and can implement combinational logic such as AND, XOR, multiplexers and more complex functions.</p></div>
+<div class="card"><span class="tag">Connectivity</span><h3>Switching / Routing Network</h3><p class="muted">Programmable interconnect connects logic blocks, memory, DSP resources and I/O.</p></div>
+<div class="card"><span class="tag">External world</span><h3>Input/Output Blocks (IOBs)</h3><p class="muted">Connect internal FPGA logic to external pins and devices, subject to electrical and timing constraints.</p></div>
+<div class="card"><span class="tag">Memory</span><h3>Block RAM (BRAM)</h3><p class="muted">Dedicated on-chip memory blocks used for buffers, FIFOs, lookup tables and small memory systems.</p></div>
+<div class="card"><span class="tag">Math</span><h3>DSP Blocks</h3><p class="muted">Dedicated arithmetic resources that accelerate operations such as multiplication and multiply-accumulate.</p></div>
+</div>
+</section>
+<section class="section">
+<h2>3. Useful hardware you can configure</h2>
+<h3>Computing and processing</h3>
+<div class="grid">
+<div class="card"><h3>1. A CPU or soft processor</h3><p>Build an ALU, registers, instruction decoder, control unit and memory interface. You can start with a simple 8-bit processor and later study open instruction-set architectures such as RISC-V.</p></div>
+<div class="card"><h3>2. Digital signal processor</h3><p>Implement FIR filters, FFT blocks, digital modulators and real-time signal-processing pipelines.</p></div>
+<div class="card"><h3>3. AI / neural-network accelerator</h3><p>Build parallel multiply-accumulate units and inference datapaths. Practical performance depends on available DSP, memory and external bandwidth resources.</p></div>
+</div>
+<h3>Memory and storage</h3>
+<div class="grid">
+<div class="card"><h3>4. Memory controller</h3><p>Manage reads and writes between a processor and external SDRAM or DDR memory. This introduces timing, protocols, refresh and data-transfer design.</p></div>
+<div class="card"><h3>5. SD-card or flash controller</h3><p>Use interfaces such as SPI to read and write persistent storage. The FPGA implements the controller; the SD card or flash chip stores the data.</p></div>
+<div class="card"><h3>6. Cache or SRAM structures</h3><p>Design small memories, address decoders, FIFOs, buffers and cache-control logic using FPGA memory resources.</p></div>
+</div>
+<h3>Networking, communications and industry</h3>
+<div class="grid">
+<div class="card"><h3>7. Ethernet packet processor</h3><p>Parse packets, classify traffic, apply rules and move data through a network datapath. High-speed Ethernet requires suitable FPGA transceivers and board-level interfaces.</p></div>
+<div class="card"><h3>8. UART, SPI, I²C and CAN controllers</h3><p>Build reusable digital interfaces to communicate with sensors, microcontrollers and other devices.</p></div>
+<div class="card"><h3>9. Software-defined radio</h3><p>Implement digital filtering, modulation, demodulation and baseband signal processing, paired with suitable RF hardware.</p></div>
+<div class="card"><h3>10. Motor-control logic</h3><p>Generate PWM, read encoder signals and implement deterministic control logic. Power stages and electrical protection are separate hardware requirements.</p></div>
+<div class="card"><h3>11. Industrial controller</h3><p>Build custom state machines, interlocks, sensor interfaces and deterministic control systems. Safety-critical systems require rigorous certification and design practices.</p></div>
+<div class="card"><h3>12. Logic analyzer</h3><p>Capture digital signals, store samples in memory and stream them to a computer for inspection.</p></div>
+</div>
+</section>
+<section class="section">
+<h2>4. FPGA, microprocessor and ASIC: how are they different?</h2>
+<table><thead><tr><th>Feature</th><th>FPGA</th><th>Microprocessor</th><th>ASIC</th></tr></thead><tbody>
+<tr><td>What it is</td><td>Configurable digital hardware fabric</td><td>Processor that executes software</td><td>Application-specific integrated circuit</td></tr>
+<tr><td>Flexibility</td><td>Hardware can be reconfigured</td><td>Software can be changed</td><td>Function is largely fixed after fabrication</td></tr>
+<tr><td>Parallelism</td><td>Many hardware operations can run concurrently</td><td>Depends on CPU architecture and cores</td><td>Can be highly optimized for its task</td></tr>
+<tr><td>Typical use</td><td>Prototyping, acceleration, custom interfaces</td><td>General-purpose computing</td><td>High-volume or specialized products</td></tr>
+</tbody></table>
+</section>
+<section class="section">
+<h2>5. How VHDL becomes working FPGA hardware</h2>
+<ol>
+<li><strong>Write HDL:</strong> describe the logic and interfaces.</li>
+<li><strong>Simulate:</strong> use a testbench to check expected behaviour.</li>
+<li><strong>Synthesize:</strong> translate the HDL into a hardware netlist.</li>
+<li><strong>Implement:</strong> map, place and route the design on the target FPGA.</li>
+<li><strong>Generate a bitstream:</strong> create the configuration data for the device.</li>
+<li><strong>Program the FPGA:</strong> load the bitstream and test the physical design.</li>
+</ol>
+<div class="callout"><strong>Important:</strong> Simulation checks the design's behaviour; it does not by itself prove that the design will meet timing or work correctly on a physical board.</div>
+</section>
+<section class="section">
+<h2>6. Boards to explore</h2>
+<div class="grid">
+<div class="card"><h3>Digilent Basys 3</h3><p class="muted">An educational Artix-7 board suited to learning digital logic, state machines and introductory FPGA projects.</p></div>
+<div class="card"><h3>Digilent Nexys A7</h3><p class="muted">A more capable educational Artix-7 board with additional resources and peripherals for larger experiments.</p></div>
+<div class="card"><h3>Sipeed Tang Nano 9K</h3><p class="muted">A compact, lower-cost entry point based on a different FPGA vendor and toolchain.</p></div>
+</div>
+<p class="muted">Tool compatibility matters: Xilinx ISE supports specific older Xilinx device families. Basys 3 and Nexys A7 typically use Vivado, while Tang Nano boards use a different tool ecosystem. Check the exact device and tool support before buying.</p>
+</section>
+<section class="section">
+<h2>7. A practical project ladder</h2>
+<div class="grid">
+<div class="project"><strong>Beginner · 8-bit ALU</strong><span class="muted">Learn combinational logic, arithmetic and control signals.</span></div>
+<div class="project"><strong>Intermediate · UART controller</strong><span class="muted">Learn timing, counters, finite-state machines and serial protocols.</span></div>
+<div class="project"><strong>Intermediate · 8-bit CPU</strong><span class="muted">Connect an ALU, registers, control unit and memory.</span></div>
+<div class="project"><strong>Advanced · RAM controller</strong><span class="muted">Learn memory timing, interfaces and data integrity.</span></div>
+<div class="project"><strong>Advanced · RISC-V soft core</strong><span class="muted">Explore instruction sets, pipelines and computer architecture.</span></div>
+</div>
+</section>
+<section class="section">
+<h2>Where to go next</h2>
+<p>Start with digital electronics, then learn VHDL or Verilog, simulation, synthesis and timing. Once the fundamentals are solid, move into RTL design, SystemVerilog verification and computer architecture.</p>
+<p><a href="ai-hft-hardware.html">Next article: What hardware powers AI and high-frequency trading? →</a></p>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 notjustsilicon · Silicon is the start. Curiosity is the point.</div></footer>
+</body></html>
